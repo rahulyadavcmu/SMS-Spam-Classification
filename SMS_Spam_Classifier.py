@@ -30,10 +30,28 @@ import numpy as np
 scores = cross_val_score(classifier, Features_train, Labels_train, cv=5)
 print 'Scores', np.mean(scores), scores
 
-#Calculate the classifier's Precision and Recall
-from sklearn.metrics import precision_score, recall_score
+#Calculate the classifier's Precision, Recall, and F1 score
+from sklearn.metrics import precision_score, recall_score, f1_score
 precisions = precision_score(Labels_test, predictions, average = None)
 print 'Precision', np.mean(precisions), precisions
+
 recalls = recall_score(Labels_test, predictions, average = None)
 print 'Recall', np.mean(recalls), recalls
 
+f1scores = f1_score(Labels_test, predictions, average = None)
+print 'F1Scores', np.mean(f1scores), f1scores
+
+#Plot the ROC curve for the classifier
+# import matplotlib.pyplot as plt
+# from sklearn.metrics import roc_curve, auc
+# false_positive_rate, recall, thresholds = roc_curve(Labels_test, predictions[:,1])
+# roc_auc = auc(false_positive_rate, recall)
+# plt.title('Receiver Operating Characteristic')
+# plt.plot(false_positive_rate, recall, 'b', label='AUC=%0.2f' %roc_auc)
+# plt.legend(loc='lower right')
+# plt.plot([0,1], [0,1], 'r--')
+# plt.xlim([0.0, 1.0])
+# plt.ylim([0.0, 1.0])
+# plt.ylabel('Recall')
+# plt.xlabel('Fall-out')
+# plt.show()
